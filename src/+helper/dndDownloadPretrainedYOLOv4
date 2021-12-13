@@ -1,4 +1,4 @@
-function model = downloadPretrainedYOLOv4(basePath, modelName)
+function model = dndDownloadPretrainedYOLOv4(basePath, modelName)
 % The downloadPretrainedYOLOv4 function downloads a YOLO v4 network 
 % pretrained on COCO dataset.
 %
@@ -11,16 +11,16 @@ dataPath = basePath;
 netFileFullPath = fullfile(dataPath, modelName + '.zip');
 
 if ~exist(netFileFullPath,'file')
-    fprintf(['Downloading pretrained ', modelName ,' network.\n']);
+    fprintf('Downloading pretrained '+ modelName +' network.\n');
     fprintf('This can take several minutes to download...\n');
-    url = ['https://ssd.mathworks.com/supportfiles/vision/deeplearning/models/yolov4/',modelName,'.zip'];
+    url = 'https://ssd.mathworks.com/supportfiles/vision/deeplearning/models/yolov4/'+modelName+'.zip';
     websave(netFileFullPath, url);
     fprintf('Done.\n\n');
     unzip(netFileFullPath, dataPath);
-    model = load(['models/', modelName, '.mat']);
+    model = load(fullfile(dataPath , modelName + '.mat'));
 else
-    fprintf(['Pretrained ', modelName, ' network already exists.\n\n']);
+    fprintf('Pretrained '+ modelName+ ' network already exists.\n\n');
     unzip(netFileFullPath, dataPath);
-    model = load(['models/', modelName, '.mat']);
+    model = load(fullfile(dataPath , modelName + '.mat'));
 end
 end
