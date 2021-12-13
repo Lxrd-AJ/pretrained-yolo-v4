@@ -20,7 +20,12 @@ if ~exist(netFileFullPath,'file')
     model = load(fullfile(dataPath , modelName + '.mat'));
 else
     fprintf('Pretrained '+ modelName+ ' network already exists.\n\n');
-    unzip(netFileFullPath, dataPath);
-    model = load(fullfile(dataPath , modelName + '.mat'));
+    if exist(weightsFile, 'file')
+        model = load(weightsFile);
+    else
+        unzip(netFileFullPath, dataPath);
+        model = load(fullfile(dataPath , modelName + '.mat'));
+    end
 end
+model = layerGraph(model.net);
 end
