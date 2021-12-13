@@ -9,6 +9,7 @@ validatestring(modelName, supportedNetworks);
 
 dataPath = basePath;
 netFileFullPath = fullfile(dataPath, modelName + '.zip');
+weightsFile = fullfile(dataPath, modelName + '.mat');
 
 if ~exist(netFileFullPath,'file')
     fprintf('Downloading pretrained '+ modelName +' network.\n');
